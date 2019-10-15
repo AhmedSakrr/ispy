@@ -390,7 +390,7 @@ def start_rdp_connection(ip_addresses, port=3389):
             # Good luck with that, I will not be sharing any of my payloads because i
             # don't feel like watching the world burn yet.
 
-            info("closing the connection now, this is a PoC not a working exploit")
+            info("closing the connection now, look's like VULNERABLE!")
             results[1].close()
         except Exception as e:
             error("unable to connect: {}".format(e))
