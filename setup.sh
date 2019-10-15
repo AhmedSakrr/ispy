@@ -12,7 +12,7 @@ Fiuscha="\033[0;35m"
 blue="\033[1;34m"
 nc="\e[0m"
 #
-path=/usr/share/metasploit-framework/modules/exploits/windows/smb/eternalblue_doublepulsar.rb   # Path install eternalblue_doublepulsar.rb
+path=/usr/share/metasploit-framework/modules/exploits/windows/smb/eternalblue_doublepulsar.rb #Path install eternalblue_doublepulsar.rb
 clear
 if hash msfconsole 2>/dev/null; then
 echo -e "$white[$green+$white] Metasploit installed $nc"
@@ -55,7 +55,7 @@ cp /root/Eternalblue-Doublepulsar-Metasploit/eternalblue_doublepulsar.rb /usr/sh
 rm -rf $tmppath/Eternalblue-Doublepulsar-Metasploit
 fi
 
-depend=$(dpkg -s wine32  | grep 'Status' | awk -F':' '/Status: / {print $2}')
+depend=$(dpkg -s wine32  | grep 'Status' | awk -F':' '/Status: / {print $2}') #Check package wine32 installed
 if [ "$depend" = " install ok installed" ]; then
 echo -e "$white[$green+$white] Wine installed $nc"
 else
