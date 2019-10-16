@@ -20,7 +20,7 @@ else
 echo -e "$white[$green!$white]$red Metasploit not installed$nc"
 echo -e "$blue installing ..$nc"
 apt update
-apt install metasploit-framework
+apt install metasploit-framework -y
 echo -e "$white[$green+$white] Metasploit installed successfully."
 fi
 
@@ -30,7 +30,7 @@ else
 echo -e "$white[$green!$white]$red Curl not installed$nc"
 echo -e "$blue installing ..$nc"
 apt update
-apt install curl
+apt install curl -y
 echo -e "$white[$green+$white] Curl installed successfully."
 fi
 
@@ -39,7 +39,7 @@ echo -e "$white[$green+$white] Python installed $nc"
 else
 echo -e "$white[$green!$white]$red Python not installed$nc"
 echo -e "$blue installing ..$nc"
-apt update; apt install python
+apt update; apt install python -y
 echo -e "$white[$green+$white] Python installed successfully."
 fi
 
