@@ -14,7 +14,7 @@ chmod +x setup.sh
 # Screenshots :
 ![Image 2](https://raw.githubusercontent.com/getdrive/ispy/master/screenshot/2.jpg)
 ![Image 3](https://raw.githubusercontent.com/getdrive/ispy/master/screenshot/3.jpg)
-![Image 4](https://raw.githubusercontent.com/getdrive/ispy/master/screenshot/4jpg)
+![Image 4](https://raw.githubusercontent.com/getdrive/ispy/master/screenshot/4.jpg)
 ![Image 5](https://raw.githubusercontent.com/getdrive/ispy/master/screenshot/5.jpg)
 ![Image 5](https://raw.githubusercontent.com/getdrive/ispy/master/screenshot/5.jpg)
 
