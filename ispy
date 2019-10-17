@@ -54,6 +54,7 @@ en="Enter"
 iface=$(ip -o -4 route show to default | awk '{print $5}')
 loc_ip=$(ip addr show $iface | awk '/inet / {print $2}' | cut -d/ -f 1)
 #STARTUP
+rm -rf screenshot
 function banner(){
 
 	echo -e "		$Cyan.___    ________________________.___."
