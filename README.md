@@ -16,7 +16,7 @@ chmod +x setup.sh
 ![Image 3](https://raw.githubusercontent.com/getdrive/ispy/master/screenshot/3.jpg)
 ![Image 4](https://raw.githubusercontent.com/getdrive/ispy/master/screenshot/4.jpg)
 ![Image 5](https://raw.githubusercontent.com/getdrive/ispy/master/screenshot/5.jpg)
-![Image 5](https://raw.githubusercontent.com/getdrive/ispy/master/screenshot/5.jpg)
+![Image 6](https://raw.githubusercontent.com/getdrive/ispy/master/screenshot/6.jpg)
 
 # Tested On :
 * Parrot OS 
